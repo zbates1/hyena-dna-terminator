@@ -1,0 +1,14 @@
+data
+histograms
+Source\ Data
+mmseqs*
+utils/__pycache__
+mmseqs
+hyena_embeds
+hyena_embeds_pe
+fine_tuned_hyena_embeds
+fine_tuned_hyena_embeds_pe
+tests/__pycache__
+__pycache__
+.pytest_cache
+tmp
