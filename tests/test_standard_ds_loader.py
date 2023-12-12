@@ -4,7 +4,9 @@ import pandas as pd
 import numpy as np
 import torch
 
-from ..utils.standard_ds_loader import StandardDatasetLoader
+# from ..utils.standard_ds_loader import StandardDatasetLoader
+import hyenadaterminator
+from hyendaterminator import StandardDatasetLoader
 
 standard_ds_loader = StandardDatasetLoader()
 

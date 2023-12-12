@@ -44,22 +44,15 @@ pip install -e . --no-build-isolation
 ---
 
 ```bash
-cd .. && git clone https://github.com/zbates1/hyena-dna-terminator.git
+git clone https://github.com/zbates1/hyena-dna-terminator.git
 ```
 
 
-#### You will need to delete and overwrite a couple files...
+#### You will need to delete the native Hyena DNA script, 'huggingface.py'. Though it will be replaced with a custom script, after you move the scripts from this repo over
 
 ```bash
 rm ./huggingface.py && rm ./Dockerfile
-```
-
-```bash
-mv ./hyena-dna-terminator/* ./
-```
-
-```bash
-pip install -r requirements.txt
+mv /hyena-dna-terminator/* ./
 ```
 
 

@@ -398,7 +398,10 @@ def evaluate_ckpt_embeddings_with_validation(ckpt_path_list,
     # on the validation datasets for every epoch and saves results to a CSV
     print('Evaluating XGBoost models...')
     print(f'Target Path: {train_variable_path}')
+    
     embeddings_ckpt_path_list = glob_ckpt_embeddings(ckpt_path_list)
+    print(f'\nNumber of embeddings found: {len(embeddings_ckpt_path_list)}, list: {embeddings_ckpt_path_list}, in {ckpt_path_list}\n')
+
     assert embeddings_ckpt_path_list, f'No embeddings found in {ckpt_path_list}'
     
     for single_ckpt_embedding_path in embeddings_ckpt_path_list:
@@ -466,7 +469,7 @@ def process_multiple_datasets(ds_path_list, save_path_list, max_length=150):
     for ds_path, save_path in zip(ds_path_list, save_path_list):
         process_and_save_dataset(ds_path, save_path, max_length)
 
-    
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process the data paths for datasets and embeddings.')
     parser.add_argument('--checkpoint_base_path', type=str, default='./fine_tuned_checkpoints', help='Base path for checkpoints from [1] fine-tuning')
@@ -492,9 +495,9 @@ if __name__ == '__main__':
     ds_4_embeddings_path = f'{EPOCH_EVAL_VAL_DS_EMBEDS_BASE_PATH}/{os.path.basename(args.ds_4_val_target_path).split(".")[0]}/'
 
     run_datasets_hyena(args.ds_1_target_path, ds_1_embeddings_path, override=True)
-    run_datasets_hyena(args.ds_2_val_target_path, ds_2_embeddings_path, override=True)
-    run_datasets_hyena(args.ds_3_val_target_path, ds_3_embeddings_path, override=True)
-    run_datasets_hyena(args.ds_4_val_target_path, ds_4_embeddings_path, override=True)
+    run_datasets_hyena(args.ds_2_val_target_path, ds_2_embeddings_path, override=False)
+    run_datasets_hyena(args.ds_3_val_target_path, ds_3_embeddings_path, override=False)
+    run_datasets_hyena(args.ds_4_val_target_path, ds_4_embeddings_path, override=False)
     print('Finished running datasets.')
 
     val_datasets_paths = [args.ds_2_val_target_path, args.ds_3_val_target_path, args.ds_4_val_target_path]
@@ -507,6 +510,6 @@ if __name__ == '__main__':
                                              val_dataset_embeddings_paths=val_dataset_embeddings_paths,
                                              validation=True)
 
-    print('Finished evaluation. Beginning epoch_eval.py script...')    
+    print('\nFinished evaluation. Beginning epoch_eval.py script...\n')    
     # NEED TO JOIN AND EDIT VARIOUS PATHS TO GET THIS TO WORK
     epoch_eval(os.path.join(CHECKPOINT_BASE_PATH, 'embeddings/cv_results/'), EPOCH_EVAL_VAL_DS_EMBEDS_BASE_PATH, val_ds_basename_list = [os.path.basename(path).split('.')[0] for path in val_datasets_paths])

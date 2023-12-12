@@ -98,7 +98,15 @@ class StandardDatasetLoader:
         val_df, training_df = generate_mmseqs_results(self.data_files, self.grouped_ds_output_file, self.mmseqs_output, self.mmseqs_min_seq_id, self.mmseqs_c, self.mmseqs_fasta_filename, self.shalem_n50c_mmseqs_ds_path, self.shalem_n50c_mmseqs_val_ds_path)
 
         return self.shalem_n50c_mmseqs_val_ds_path, training_df
+    
+    def process_val_datasets(self):
 
+        val_ds_list = [self.shalem_13_val_ds_path, self.curran_15_val_ds_path]
+        val_ds_save_path_list = [self.shalem_13_val_processed_ds_path, self.curran_15_val_processed_ds_path]
+        
+        for val_ds_path, val_ds_save_path in zip(val_ds_list, val_ds_save_path_list):
+            self.chop_pad_sequences(val_ds_path, val_ds_save_path)
+        
     def load_hyena_data_process_settings(self):
         # This function is for the [2] notebook. It establishes settings for the hyena data process. 
         
